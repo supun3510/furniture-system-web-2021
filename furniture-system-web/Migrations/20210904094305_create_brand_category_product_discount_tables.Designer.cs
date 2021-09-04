@@ -10,8 +10,8 @@ using furniture_system_web.Model;
 namespace furniture_system_web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210829032046_init")]
-    partial class init
+    [Migration("20210904094305_create_brand_category_product_discount_tables")]
+    partial class create_brand_category_product_discount_tables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -221,6 +221,96 @@ namespace furniture_system_web.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("furniture_system_web.Model.Brand", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Brand_Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Brand_Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("brands");
+                });
+
+            modelBuilder.Entity("furniture_system_web.Model.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Category_Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Category_Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("categories");
+                });
+
+            modelBuilder.Entity("furniture_system_web.Model.Discount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Discount_Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discount_Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("discounts");
+                });
+
+            modelBuilder.Entity("furniture_system_web.Model.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Brand_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Category_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ItemCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ItemName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("products");
                 });
 
             modelBuilder.Entity("furniture_system_web.Model.ApplicationUser", b =>

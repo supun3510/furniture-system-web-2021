@@ -7,9 +7,13 @@ using System.Threading.Tasks;
 
 namespace furniture_system_web.Model
 {
-    public class AuthenticationContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
-        public AuthenticationContext(DbContextOptions options):base(options)
+        public ApplicationDbContext()
+        {
+        }
+
+        public ApplicationDbContext(DbContextOptions options):base(options)
         {
 
         }

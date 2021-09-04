@@ -35,9 +35,9 @@ namespace furniture_system_web
 
             services.AddControllers();
 
-            services.AddDbContext<AuthenticationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
 
-            services.AddIdentityCore<ApplicationUser>().AddEntityFrameworkStores<AuthenticationContext>();
+            services.AddIdentityCore<ApplicationUser>().AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.Configure<IdentityOptions>(options =>
             {
