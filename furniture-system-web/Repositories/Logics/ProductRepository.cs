@@ -1,38 +1,21 @@
 ﻿using furniture_system_web.Model;
-using furniture_system_web.Repositories;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-
-namespace furniture_system_web.Controllers
+namespace furniture_system_web.Repositories
 {
-    [Route("api/Product")]
-    [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductRepository : IProductRepository
     {
-        private readonly IProductRepository _productRepo;
-        private UserManager<ApplicationUser> _userManager;
-        private readonly ApplicationSettings _appSettings;
-
-        public ProductController(UserManager<ApplicationUser> userManager, IOptions<ApplicationSettings> appSettings)
-        {
-            _productRepo = new ProductRepository();
-            _appSettings = appSettings.Value;
-            _userManager = userManager;
-        }
-        [HttpGet]
         public async Task<IEnumerable<Product>> GetProducts()
         {
             try
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    return await _productRepo.GetProducts();
+                    return await db.products.Where(x => x.Status == true).ToListAsync();
                 }
             }
             catch (Exception)
@@ -42,14 +25,13 @@ namespace furniture_system_web.Controllers
             }
         }
 
-        [HttpGet]
         public async Task<Product> GetProductById(int id)
         {
             try
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    return await _productRepo.GetProductById(id);
+                    return await db.products.Where(x => x.Id == id).FirstOrDefaultAsync();
                 }
             }
             catch (Exception)
@@ -59,15 +41,17 @@ namespace furniture_system_web.Controllers
             }
 
         }
-
-        [HttpPost]
         public async Task<bool> SaveProduct(Product model)
         {
             try
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    return await _productRepo.SaveProduct(model);
+                    model.Status = true;
+                    db.products.Add(model);
+                    db.SaveChanges();
+
+                    return true;
                 }
             }
             catch (Exception)
@@ -78,7 +62,6 @@ namespace furniture_system_web.Controllers
 
         }
 
-        [HttpPost]
         public async Task<bool> UpdateProduct(Product model)
         {
             try
@@ -86,7 +69,15 @@ namespace furniture_system_web.Controllers
 
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    return await _productRepo.UpdateProduct(model);
+                    var res = await db.products.Where(x => x.Id == model.Id).FirstOrDefaultAsync();
+                    res.ItemCode = model.ItemCode;
+                    res.ItemName = model.ItemName;
+                    res.Brand_Id = model.Brand_Id;
+                    res.Category_Id = model.Category_Id;
+
+                    db.SaveChanges();
+
+                    return true;
                 }
             }
             catch (Exception)
@@ -96,7 +87,6 @@ namespace furniture_system_web.Controllers
             }
         }
 
-        [HttpPost]
         public async Task<bool> DeleteProduct(int id)
         {
             try
@@ -104,7 +94,11 @@ namespace furniture_system_web.Controllers
 
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    return await _productRepo.DeleteProduct(id);
+                    var res = await db.products.Where(x => x.Id == id).FirstOrDefaultAsync();
+                    res.Status = false;
+
+                    db.SaveChanges();
+                    return true;
                 }
             }
             catch (Exception)

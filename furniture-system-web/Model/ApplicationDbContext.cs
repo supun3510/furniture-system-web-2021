@@ -17,6 +17,10 @@ namespace furniture_system_web.Model
         {
 
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Server=(LocalDb)\\MSSQLLocalDB; Database=furniture890_db; Trusted_Connection= True;");
+        }
 
         public DbSet<ApplicationUser> applicationUsers { get; set; }
         public DbSet<Category> categories { get; set; }

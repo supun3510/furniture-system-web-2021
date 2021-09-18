@@ -1,5 +1,8 @@
 ﻿using furniture_system_web.Model;
+using furniture_system_web.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +12,28 @@ using System.Threading.Tasks;
 
 namespace furniture_system_web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Discount")]
     [ApiController]
     public class DiscountController : ControllerBase
     {
-        // GET: api/<DiscountController>
+        private readonly IDiscountRepository _discountRepo;
+        private UserManager<ApplicationUser> _userManager;
+        private readonly ApplicationSettings _appSettings;
+
+        public DiscountController(UserManager<ApplicationUser> userManager, IOptions<ApplicationSettings> appSettings)
+        {
+            _discountRepo = new DiscountRepository();
+            _appSettings = appSettings.Value;
+            _userManager = userManager;
+        }
         [HttpGet]
-        public IEnumerable<Discount> GetCategories()
+        public async Task<IEnumerable<Discount>> GetDiscounts()
         {
             try
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    return db.discounts.Where(x=>x.Status == true).ToList();
+                    return await _discountRepo.GetDiscounts();
                 }
             }
             catch (Exception)
@@ -31,16 +43,15 @@ namespace furniture_system_web.Controllers
             }
         }
 
-        // GET api/<DiscountController>/5
-        [HttpGet("{id}")]
-        public Discount GetDiscountById(int id)
+        [HttpGet]
+        public async Task<Discount> GetDiscountById(int id)
         {
             try
             {
 
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    return db.discounts.Where(x => x.Id == id).FirstOrDefault();
+                    return await _discountRepo.GetDiscountById(id);
                 }
             }
             catch (Exception)
@@ -50,19 +61,15 @@ namespace furniture_system_web.Controllers
             }
         }
 
-        // POST api/<DiscountController>
         [HttpPost]
-        public bool SaveDiscount(Discount model)
+        public async Task<bool> SaveDiscount(Discount model)
         {
             try
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    model.Status = true;
-                    db.discounts.Add(model);
-                    db.SaveChanges();
 
-                    return true;
+                    return await _discountRepo.SaveDiscount(model);
                 }
             }
             catch (Exception)
@@ -72,23 +79,17 @@ namespace furniture_system_web.Controllers
             }
 
         }
-
-        // PUT api/<DiscountController>/5
-        [HttpPut("{id}")]
-        public bool UpdateDiscount(Discount model)
+        
+        [HttpPost]
+        public async Task<bool> UpdateDiscount(Discount model)
         {
             try
             {
 
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    var res = db.discounts.Where(x => x.Id == model.Id).FirstOrDefault();
-                    res.Discount_Code = model.Discount_Code;
-                    res.Discount_Name = model.Discount_Name;
 
-                    db.SaveChanges();
-
-                    return true;
+                    return await _discountRepo.UpdateDiscount(model);
                 }
             }
             catch (Exception)
@@ -98,21 +99,16 @@ namespace furniture_system_web.Controllers
             }
         }
 
-        // DELETE api/<DiscountController>/5
-        [HttpDelete("{id}")]
-        public bool DeleteDiscount(int id)
+        [HttpPost]
+        public async Task<bool> DeleteDiscount(int id)
         {
             try
             {
 
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    var res = db.discounts.Where(x => x.Id == id).FirstOrDefault();
-                    res.Status = false;
 
-                    db.SaveChanges();
-
-                    return true;
+                    return await _discountRepo.DeleteDiscount(id);
                 }
             }
             catch (Exception)

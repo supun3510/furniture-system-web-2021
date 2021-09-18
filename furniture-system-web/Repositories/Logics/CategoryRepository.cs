@@ -1,41 +1,22 @@
 ﻿using furniture_system_web.Model;
-using furniture_system_web.Repositories;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-
-namespace furniture_system_web.Controllers
+namespace furniture_system_web.Logics
 {
-    [Route("api/Brand")]
-    [ApiController]
-    public class BrandController : ControllerBase
+    public class CategoryRepository : ICategoryRepository
     {
-
-        private readonly IBrandRepository _brandRepo;
-        // GET: api/<CategoryController>
-        private UserManager<ApplicationUser> _userManager;
-        private readonly ApplicationSettings _appSettings;
-
-        public BrandController(UserManager<ApplicationUser> userManager, IOptions<ApplicationSettings> appSettings)
-        {
-            _brandRepo = new BrandRepository();
-            _appSettings = appSettings.Value;
-            _userManager = userManager;
-        }
-
-        [HttpGet]
-        public async Task<IEnumerable<Brand>> GetBrands()
+        public async Task<IEnumerable<Category>> GetCategories()
         {
             try
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    return await _brandRepo.GetBrands();
+                    return await db.categories.Where(x => x.Status == true).ToListAsync();
                 }
             }
             catch (Exception)
@@ -44,33 +25,13 @@ namespace furniture_system_web.Controllers
                 throw;
             }
         }
-
-        [HttpGet]
-        public async Task<Brand> GetBrandById(int id)
+        public async Task<Category> GetCategoryById(int id)
         {
             try
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    return await _brandRepo.GetBrandById(id);
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-
-        [HttpPost]
-        public async Task<bool> SaveBrand(Brand model)
-        {
-            try
-            {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
-                    return await _brandRepo.SaveBrand(model);
+                    return await db.categories.Where(x => x.Id == id).FirstOrDefaultAsync();
                 }
             }
             catch (Exception)
@@ -81,15 +42,17 @@ namespace furniture_system_web.Controllers
 
         }
 
-        [HttpPost]
-        public async Task<bool> UpdateBrand(Brand model)
+        public async Task<bool> SaveCategory(Category model)
         {
             try
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
+                    model.Status = true;
+                    db.categories.Add(model);
+                    db.SaveChanges();
 
-                    return await _brandRepo.UpdateBrand(model);
+                    return true;
                 }
             }
             catch (Exception)
@@ -100,15 +63,41 @@ namespace furniture_system_web.Controllers
 
         }
 
-        [HttpPost]
-        public async Task<bool> DeleteBrand(int id)
+        public async Task<bool> UpdateCategory(Category model)
         {
             try
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
+                    var res = await db.categories.Where(x => x.Id == model.Id).FirstOrDefaultAsync();
+                    res.Category_Code = model.Category_Code;
+                    res.Category_Name = model.Category_Name;
 
-                    return await _brandRepo.DeleteBrand(id);
+                    db.SaveChanges();
+
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        public async Task<bool> DeleteCategory(int id)
+        {
+            try
+            {
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    var res = await db.categories.Where(x => x.Id == id).FirstOrDefaultAsync();
+                    res.Status = false;
+
+                    db.SaveChanges();
+
+                    return true;
                 }
             }
             catch (Exception)

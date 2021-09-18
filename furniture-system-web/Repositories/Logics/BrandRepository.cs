@@ -1,41 +1,22 @@
 ﻿using furniture_system_web.Model;
-using furniture_system_web.Repositories;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-
-namespace furniture_system_web.Controllers
+namespace furniture_system_web.Repositories
 {
-    [Route("api/Brand")]
-    [ApiController]
-    public class BrandController : ControllerBase
+    public class BrandRepository : IBrandRepository
     {
 
-        private readonly IBrandRepository _brandRepo;
-        // GET: api/<CategoryController>
-        private UserManager<ApplicationUser> _userManager;
-        private readonly ApplicationSettings _appSettings;
-
-        public BrandController(UserManager<ApplicationUser> userManager, IOptions<ApplicationSettings> appSettings)
-        {
-            _brandRepo = new BrandRepository();
-            _appSettings = appSettings.Value;
-            _userManager = userManager;
-        }
-
-        [HttpGet]
         public async Task<IEnumerable<Brand>> GetBrands()
         {
             try
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    return await _brandRepo.GetBrands();
+                    return await db.brands.Where(x => x.Status == true).ToListAsync();
                 }
             }
             catch (Exception)
@@ -45,14 +26,13 @@ namespace furniture_system_web.Controllers
             }
         }
 
-        [HttpGet]
         public async Task<Brand> GetBrandById(int id)
         {
             try
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    return await _brandRepo.GetBrandById(id);
+                    return await db.brands.Where(x => x.Id == id).FirstOrDefaultAsync();
                 }
             }
             catch (Exception)
@@ -62,15 +42,17 @@ namespace furniture_system_web.Controllers
             }
         }
 
-
-        [HttpPost]
         public async Task<bool> SaveBrand(Brand model)
         {
             try
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    return await _brandRepo.SaveBrand(model);
+                    model.Status = true;
+                    db.brands.Add(model);
+                    db.SaveChanges();
+
+                    return true;
                 }
             }
             catch (Exception)
@@ -81,15 +63,19 @@ namespace furniture_system_web.Controllers
 
         }
 
-        [HttpPost]
         public async Task<bool> UpdateBrand(Brand model)
         {
             try
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
+                    var res = await db.brands.Where(x => x.Id == model.Id).FirstOrDefaultAsync();
+                    res.Brand_Code = model.Brand_Code;
+                    res.Brand_Name = model.Brand_Name;
 
-                    return await _brandRepo.UpdateBrand(model);
+                    db.SaveChanges();
+
+                    return true;
                 }
             }
             catch (Exception)
@@ -100,15 +86,18 @@ namespace furniture_system_web.Controllers
 
         }
 
-        [HttpPost]
         public async Task<bool> DeleteBrand(int id)
         {
             try
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
+                    var res = await db.brands.Where(x => x.Id == id).FirstOrDefaultAsync();
+                    res.Status = false;
 
-                    return await _brandRepo.DeleteBrand(id);
+                    db.SaveChanges();
+
+                    return true;
                 }
             }
             catch (Exception)
