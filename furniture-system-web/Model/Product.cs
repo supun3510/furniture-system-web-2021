@@ -16,6 +16,7 @@ namespace furniture_system_web.Model
         public string ItemName { get; set; }
         public int Brand_Id { get; set; }
         public int Category_Id { get; set; }
+        public double Retail_Price { get; set; }
         public bool Status { get; set; }
     }
 }
