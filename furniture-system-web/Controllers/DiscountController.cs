@@ -27,6 +27,7 @@ namespace furniture_system_web.Controllers
             _userManager = userManager;
         }
         [HttpGet]
+        [Route("GetDiscounts")]
         public async Task<IEnumerable<Discount>> GetDiscounts()
         {
             try
@@ -44,6 +45,7 @@ namespace furniture_system_web.Controllers
         }
 
         [HttpGet]
+        [Route("GetDiscountById")]
         public async Task<Discount> GetDiscountById(int id)
         {
             try
@@ -62,6 +64,7 @@ namespace furniture_system_web.Controllers
         }
 
         [HttpPost]
+        [Route("SaveDiscount")]
         public async Task<bool> SaveDiscount(Discount model)
         {
             try
@@ -81,6 +84,7 @@ namespace furniture_system_web.Controllers
         }
         
         [HttpPost]
+        [Route("UpdateDiscount")]
         public async Task<bool> UpdateDiscount(Discount model)
         {
             try
@@ -100,6 +104,7 @@ namespace furniture_system_web.Controllers
         }
 
         [HttpPost]
+        [Route("DeleteDiscount")]
         public async Task<bool> DeleteDiscount(int id)
         {
             try

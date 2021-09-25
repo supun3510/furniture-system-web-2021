@@ -26,6 +26,7 @@ namespace furniture_system_web.Controllers
             _userManager = userManager;
         }
         [HttpGet]
+        [Route("GetProducts")]
         public async Task<IEnumerable<Product>> GetProducts()
         {
             try
@@ -43,6 +44,7 @@ namespace furniture_system_web.Controllers
         }
 
         [HttpGet]
+        [Route("GetProductById")]
         public async Task<Product> GetProductById(int id)
         {
             try
@@ -61,6 +63,7 @@ namespace furniture_system_web.Controllers
         }
 
         [HttpPost]
+        [Route("SaveProduct")]
         public async Task<bool> SaveProduct(Product model)
         {
             try
@@ -79,6 +82,7 @@ namespace furniture_system_web.Controllers
         }
 
         [HttpPost]
+        [Route("UpdateProduct")]
         public async Task<bool> UpdateProduct(Product model)
         {
             try
@@ -97,6 +101,7 @@ namespace furniture_system_web.Controllers
         }
 
         [HttpPost]
+        [Route("DeleteProduct")]
         public async Task<bool> DeleteProduct(int id)
         {
             try

@@ -29,6 +29,7 @@ namespace furniture_system_web.Controllers
         }
 
         [HttpGet]
+        [Route("GetBrands")]
         public async Task<IEnumerable<Brand>> GetBrands()
         {
             try
@@ -46,6 +47,7 @@ namespace furniture_system_web.Controllers
         }
 
         [HttpGet]
+        [Route("GetBrandById")]
         public async Task<Brand> GetBrandById(int id)
         {
             try
@@ -64,6 +66,7 @@ namespace furniture_system_web.Controllers
 
 
         [HttpPost]
+        [Route("SaveBrand")]
         public async Task<bool> SaveBrand(Brand model)
         {
             try
@@ -82,6 +85,7 @@ namespace furniture_system_web.Controllers
         }
 
         [HttpPost]
+        [Route("UpdateBrand")]
         public async Task<bool> UpdateBrand(Brand model)
         {
             try
@@ -101,6 +105,7 @@ namespace furniture_system_web.Controllers
         }
 
         [HttpPost]
+        [Route("DeleteBrand")]
         public async Task<bool> DeleteBrand(int id)
         {
             try

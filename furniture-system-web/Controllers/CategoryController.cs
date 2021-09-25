@@ -28,6 +28,7 @@ namespace furniture_system_web.Controllers
             _userManager = userManager;
         }
         [HttpGet]
+        [Route("GetCategories")]
         public async Task<IEnumerable<Category>> GetCategories()
         {
             try
@@ -45,6 +46,7 @@ namespace furniture_system_web.Controllers
         }
 
         [HttpGet]
+        [Route("GetCategoryById")]
         public async Task<Category> GetCategoryById(int id)
         {
             try
@@ -63,6 +65,7 @@ namespace furniture_system_web.Controllers
         }
 
         [HttpPost]
+        [Route("SaveCategory")]
         public async Task<bool> SaveCategory(Category model)
         {
             try
@@ -82,6 +85,7 @@ namespace furniture_system_web.Controllers
         }
 
         [HttpPost]
+        [Route("UpdateCategory")]
         public async Task<bool> UpdateCategory(Category model)
         {
             try
@@ -101,6 +105,7 @@ namespace furniture_system_web.Controllers
         }
 
         [HttpPost]
+        [Route("DeleteCategory")]
         public async Task<bool> DeleteCategory(int id)
         {
             try
