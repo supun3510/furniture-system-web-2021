@@ -74,7 +74,7 @@ namespace furniture_system_web.Repositories
                     res.ItemName = model.ItemName;
                     res.Brand_Id = model.Brand_Id;
                     res.Category_Id = model.Category_Id;
-
+                    db.Entry(res).CurrentValues.SetValues(model);
                     db.SaveChanges();
 
                     return true;

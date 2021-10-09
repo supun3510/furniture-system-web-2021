@@ -27,5 +27,8 @@ namespace furniture_system_web.Model
         public DbSet<Brand> brands { get; set; }
         public DbSet<Product> products { get; set; }
         public DbSet<Discount> discounts { get; set; }
+        public DbSet<Stock> stocks { get; set; }
+        public DbSet<Production> productions { get; set; }
+        public DbSet<ProductionCart> ProductionCarts { get; set; }
     }
 }

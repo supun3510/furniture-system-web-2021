@@ -72,7 +72,7 @@ namespace furniture_system_web.Repositories
                     var res = await db.discounts.Where(x => x.Id == model.Id).FirstOrDefaultAsync();
                     res.Discount_Code = model.Discount_Code;
                     res.Discount_Name = model.Discount_Name;
-
+                    db.Entry(res).CurrentValues.SetValues(model);
                     db.SaveChanges();
 
                     return true;
