@@ -14,6 +14,8 @@ namespace furniture_system_web.Model
         public int Id { get; set; }
         public string Discount_Code { get; set; }
         public string Discount_Name { get; set; }
+        public double Discount_Amount { get;set;}
+        public string Item_Code { get;set;}
         public bool Status { get; set; }
     }
 }

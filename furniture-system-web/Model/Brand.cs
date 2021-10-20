@@ -13,7 +13,6 @@ namespace furniture_system_web.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; } 
         public string Brand_Code { get; set; }
-
         public string Brand_Name { get; set; }
         public bool Status { get; set; }
     }
