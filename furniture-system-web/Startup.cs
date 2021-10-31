@@ -35,8 +35,9 @@ namespace furniture_system_web
 
             services.AddCors(options =>
             {
-                options.AddPolicy("AllowAllOrigins",
-                    builder => builder.AllowAnyOrigin());
+                options.AddPolicy(
+                    name: "AllowOrigins",
+                    builder => { builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); });
             });
 
             services.AddControllers();
@@ -86,10 +87,7 @@ namespace furniture_system_web
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(builder =>
-            builder.WithOrigins(Configuration["ApplicationSetting:Client_URL"].ToString())
-            .AllowAnyHeader()
-            .AllowAnyMethod());
+            app.UseCors("AllowOrigins");
 
             app.UseAuthentication();
 
