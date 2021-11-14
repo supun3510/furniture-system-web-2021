@@ -30,6 +30,9 @@ namespace furniture_system_web.Model
         public DbSet<Discount> discounts { get; set; }
         public DbSet<Stock> stocks { get; set; }
         public DbSet<Production> productions { get; set; }
+        public DbSet<CashProduction> cashProductions { get; set; }
+        public DbSet<CheckProduction> checkProductions { get; set; }
+        public DbSet<CardProduction> cardProductions { get; set; }
         public DbSet<ProductionCart> ProductionCarts { get; set; }
     }
 }

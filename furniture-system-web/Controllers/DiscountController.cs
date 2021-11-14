@@ -83,7 +83,7 @@ namespace furniture_system_web.Controllers
 
         }
         
-        [HttpPost]
+        [HttpPut]
         [Route("UpdateDiscount")]
         public async Task<bool> UpdateDiscount(Discount model)
         {
@@ -103,7 +103,7 @@ namespace furniture_system_web.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("DeleteDiscount")]
         public async Task<bool> DeleteDiscount(int id)
         {

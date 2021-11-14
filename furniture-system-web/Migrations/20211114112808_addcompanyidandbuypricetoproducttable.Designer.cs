@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using furniture_system_web.Model;
 
 namespace furniture_system_web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class AuthenticationContextModelSnapshot : ModelSnapshot
+    [Migration("20211114112808_addcompanyidandbuypricetoproducttable")]
+    partial class addcompanyidandbuypricetoproducttable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -255,12 +257,6 @@ namespace furniture_system_web.Migrations
                     b.Property<string>("Bill_Code")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Created_By")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Created_Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<double>("Customer_Balence")
                         .HasColumnType("float");
 
@@ -287,12 +283,6 @@ namespace furniture_system_web.Migrations
 
                     b.Property<string>("Bill_Code")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Created_By")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Created_Date")
-                        .HasColumnType("datetime2");
 
                     b.Property<double>("Customer_Balence")
                         .HasColumnType("float");
@@ -344,12 +334,6 @@ namespace furniture_system_web.Migrations
 
                     b.Property<string>("Check_Number")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Created_By")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Created_Date")
-                        .HasColumnType("datetime2");
 
                     b.Property<double>("Customer_Balence")
                         .HasColumnType("float");
@@ -462,9 +446,6 @@ namespace furniture_system_web.Migrations
                     b.Property<string>("Bill_Code")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Created_By")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("Created_Date")
                         .HasColumnType("datetime2");
 
@@ -522,8 +503,8 @@ namespace furniture_system_web.Migrations
                     b.Property<string>("Item_Code")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Quentity")
-                        .HasColumnType("int");
+                    b.Property<string>("Quentity")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");

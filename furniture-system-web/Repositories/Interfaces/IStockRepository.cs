@@ -9,5 +9,6 @@ namespace furniture_system_web.Repositories.Interfaces
     public interface IStockRepository
     {
         Task<string> UpdateStock(Stock model);
+        Task<List<Stock>> GetStock();
     }
 }

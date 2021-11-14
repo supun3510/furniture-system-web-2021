@@ -1,5 +1,6 @@
 ﻿using furniture_system_web.Model;
 using furniture_system_web.Repositories;
+using furniture_system_web.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ namespace furniture_system_web.Controllers
     public class StockManageController : ControllerBase
     {
         // GET: api/<CategoryController>
-        private readonly IProductRepository _productRepo;
+        private readonly IStockRepository _stockRepo;
         private UserManager<ApplicationUser> _userManager;
         private readonly ApplicationSettings _appSettings;
 
@@ -27,13 +28,31 @@ namespace furniture_system_web.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Product>> GetProducts()
+        public async Task<List<Stock>> GetStock()
         {
             try
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    return await _productRepo.GetProducts();
+                    return await _stockRepo.GetStock();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [HttpPost]
+        public async Task<string> UpdateStock(Stock stock)
+        {
+            try
+            {
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+
+                    return await _stockRepo.UpdateStock(stock);
                 }
             }
             catch (Exception)

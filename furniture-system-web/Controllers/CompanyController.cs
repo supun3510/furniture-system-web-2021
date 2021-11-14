@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace furniture_system_web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Company")]
     [ApiController]
     public class CompanyController : ControllerBase
     {
@@ -83,7 +83,7 @@ namespace furniture_system_web.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("UpdateCompany")]
         public async Task<bool> UpdateCompany(Company model)
         {
@@ -103,7 +103,7 @@ namespace furniture_system_web.Controllers
 
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("DeleteCompany")]
         public async Task<bool> DeleteCompany(int id)
         {

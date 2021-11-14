@@ -81,7 +81,7 @@ namespace furniture_system_web.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("UpdateProduct")]
         public async Task<bool> UpdateProduct(Product model)
         {
@@ -100,7 +100,7 @@ namespace furniture_system_web.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("DeleteProduct")]
         public async Task<bool> DeleteProduct(int id)
         {

@@ -5,6 +5,6 @@ namespace furniture_system_web.Repositories.Logics
 {
     public interface IProductionRepository
     {
-        Task<string> SaveBill(Production model);
+        Task<bool> SaveBill(ProductionVM model);
     }
 }

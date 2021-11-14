@@ -72,6 +72,7 @@ namespace furniture_system_web.Repositories
                     var res = await db.brands.Where(x => x.Id == model.Id).FirstOrDefaultAsync();
                     res.Brand_Code = model.Brand_Code;
                     res.Brand_Name = model.Brand_Name;
+                    res.Status = model.Status;
                     db.Entry(res).CurrentValues.SetValues(model);
                     db.SaveChanges();
 

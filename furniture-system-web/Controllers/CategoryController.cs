@@ -84,7 +84,7 @@ namespace furniture_system_web.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("UpdateCategory")]
         public async Task<bool> UpdateCategory(Category model)
         {
@@ -104,7 +104,7 @@ namespace furniture_system_web.Controllers
 
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("DeleteCategory")]
         public async Task<bool> DeleteCategory(int id)
         {

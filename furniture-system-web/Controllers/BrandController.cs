@@ -84,7 +84,7 @@ namespace furniture_system_web.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("UpdateBrand")]
         public async Task<bool> UpdateBrand(Brand model)
         {
@@ -104,7 +104,7 @@ namespace furniture_system_web.Controllers
 
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("DeleteBrand")]
         public async Task<bool> DeleteBrand(int id)
         {

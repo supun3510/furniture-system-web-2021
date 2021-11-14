@@ -18,8 +18,8 @@ namespace furniture_system_web.Repositories.Logics
                 {
                     var _exists = await db.stocks.Where(x => x.Item_Code == model.Item_Code).FirstOrDefaultAsync();
 
-                    model.Quentity = _exists.Quentity;
-                    db.Entry(_exists).CurrentValues.SetValues(model);
+                    _exists.Quentity = _exists.Quentity + model.Quentity ;
+                    db.Entry(_exists).CurrentValues.SetValues(_exists);
                     await  db.SaveChangesAsync();
 
                     return "Updated";
@@ -31,5 +31,25 @@ namespace furniture_system_web.Repositories.Logics
                 throw;
             }
         }
+        public async Task<List<Stock>> GetStock()
+        {
+            try
+            {
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    var list = await db.stocks.Where(x=>x.Status == true).ToListAsync();
+
+                    return list;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+
     }
 }

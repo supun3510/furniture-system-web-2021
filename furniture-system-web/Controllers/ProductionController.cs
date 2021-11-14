@@ -1,5 +1,6 @@
 ﻿using furniture_system_web.Model;
 using furniture_system_web.Repositories;
+using furniture_system_web.Repositories.Logics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ namespace furniture_system_web.Controllers
     public class ProductionController : ControllerBase
     {
         // GET: api/<CategoryController>
-        private readonly IProductRepository _productRepo;
+        private readonly IProductionRepository _productionRepo;
         private UserManager<ApplicationUser> _userManager;
         private readonly ApplicationSettings _appSettings;
 
@@ -27,13 +28,13 @@ namespace furniture_system_web.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Product>> GetProducts()
+        public async Task<bool> SaveBill(ProductionVM model)
         {
             try
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    return await _productRepo.GetProducts();
+                    return await _productionRepo.SaveBill(model);
                 }
             }
             catch (Exception)

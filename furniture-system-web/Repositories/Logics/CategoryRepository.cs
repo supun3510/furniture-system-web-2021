@@ -72,6 +72,7 @@ namespace furniture_system_web.Logics
                     var res = await db.categories.Where(x => x.Id == model.Id).FirstOrDefaultAsync();
                     res.Category_Code = model.Category_Code;
                     res.Category_Name = model.Category_Name;
+                    res.Status = model.Status;
                     db.Entry(res).CurrentValues.SetValues(model);
                     db.SaveChanges();
 
