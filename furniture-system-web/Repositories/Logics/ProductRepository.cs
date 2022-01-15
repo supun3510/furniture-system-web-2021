@@ -15,7 +15,7 @@ namespace furniture_system_web.Repositories
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    return await db.products.Where(x => x.Status == true).ToListAsync();
+                    return await db.products.ToListAsync();
                 }
             }
             catch (Exception)
@@ -47,9 +47,16 @@ namespace furniture_system_web.Repositories
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    model.Status = true;
                     db.products.Add(model);
-                    db.SaveChanges();
+
+                    Stock stock = new Stock();
+                    stock.Item_Code = model.ItemCode;
+                    stock.Quentity = 0;
+                    stock.Status = true;
+
+                    db.stocks.Add(stock);
+
+                  await  db.SaveChangesAsync();
 
                     return true;
                 }

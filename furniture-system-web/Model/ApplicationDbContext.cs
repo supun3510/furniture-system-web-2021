@@ -19,7 +19,7 @@ namespace furniture_system_web.Model
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=SQL5052.site4now.net;Initial Catalog=db_a7a466_supunsam;User Id=db_a7a466_supunsam_admin;Password=supun3510");
+            optionsBuilder.UseSqlServer("Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=db_sandamal; Persist Security Info=True;");
         }
 
         public DbSet<ApplicationUser> applicationUsers { get; set; }

@@ -15,7 +15,7 @@ namespace furniture_system_web.Repositories.Logics
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    return await db.companies.Where(x => x.Status == true).ToListAsync();
+                    return await db.companies.ToListAsync();
                 }
             }
             catch (Exception)
@@ -47,7 +47,6 @@ namespace furniture_system_web.Repositories.Logics
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    model.Status = true;
                     db.companies.Add(model);
                     db.SaveChanges();
 

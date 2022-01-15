@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace furniture_system_web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Production")]
     [ApiController]
     public class ProductionController : ControllerBase
     {
@@ -25,9 +25,11 @@ namespace furniture_system_web.Controllers
         {
             _appSettings = appSettings.Value;
             _userManager = userManager;
+            _productionRepo = new ProductionRepository();
         }
 
-        [HttpGet]
+        [HttpPost]
+        [Route("SaveBill")]
         public async Task<bool> SaveBill(ProductionVM model)
         {
             try

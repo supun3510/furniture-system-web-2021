@@ -1,6 +1,7 @@
 ﻿using furniture_system_web.Model;
 using furniture_system_web.Repositories;
 using furniture_system_web.Repositories.Interfaces;
+using furniture_system_web.Repositories.Logics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -25,9 +26,11 @@ namespace furniture_system_web.Controllers
         {
             _appSettings = appSettings.Value;
             _userManager = userManager;
+            _stockRepo = new StockRepository();
         }
 
         [HttpGet]
+        [Route("GetStock")]
         public async Task<List<Stock>> GetStock()
         {
             try
@@ -45,6 +48,7 @@ namespace furniture_system_web.Controllers
         }
 
         [HttpPost]
+        [Route("UpdateStock")]
         public async Task<string> UpdateStock(Stock stock)
         {
             try
