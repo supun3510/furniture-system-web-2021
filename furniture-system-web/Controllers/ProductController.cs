@@ -31,10 +31,7 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
                     return await _productRepo.GetProducts();
-                }
             }
             catch (Exception)
             {
@@ -49,10 +46,7 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
                     return await _productRepo.GetProductById(id);
-                }
             }
             catch (Exception)
             {
@@ -68,10 +62,7 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
                     return await _productRepo.SaveProduct(model);
-                }
             }
             catch (Exception)
             {
@@ -88,10 +79,7 @@ namespace furniture_system_web.Controllers
             try
             {
 
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
                     return await _productRepo.UpdateProduct(model);
-                }
             }
             catch (Exception)
             {
@@ -107,10 +95,7 @@ namespace furniture_system_web.Controllers
             try
             {
 
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
-                    return await _productRepo.DeleteProduct(id);
-                }
+                return await _productRepo.DeleteProduct(id);
             }
             catch (Exception)
             {

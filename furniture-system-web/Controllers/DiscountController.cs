@@ -32,10 +32,7 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
                     return await _discountRepo.GetDiscounts();
-                }
             }
             catch (Exception)
             {
@@ -51,10 +48,7 @@ namespace furniture_system_web.Controllers
             try
             {
 
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
                     return await _discountRepo.GetDiscountById(id);
-                }
             }
             catch (Exception)
             {
@@ -69,11 +63,7 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
-
                     return await _discountRepo.SaveDiscount(model);
-                }
             }
             catch (Exception)
             {
@@ -90,11 +80,7 @@ namespace furniture_system_web.Controllers
             try
             {
 
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
-
                     return await _discountRepo.UpdateDiscount(model);
-                }
             }
             catch (Exception)
             {
@@ -109,12 +95,7 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
-
                     return await _discountRepo.DeleteDiscount(id);
-                }
             }
             catch (Exception)
             {

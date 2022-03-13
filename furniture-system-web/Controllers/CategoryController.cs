@@ -33,10 +33,7 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
                     return await _categoryRepo.GetCategories();
-                }
             }
             catch (Exception e)
             {
@@ -51,10 +48,7 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
                     return await _categoryRepo.GetCategoryById(id);
-                }
             }
             catch (Exception)
             {
@@ -70,11 +64,7 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
-
                     return await _categoryRepo.SaveCategory(model);
-                }
             }
             catch (Exception)
             {
@@ -90,11 +80,8 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
 
                     return await _categoryRepo.UpdateCategory(model);
-                }
             }
             catch (Exception)
             {
@@ -110,11 +97,8 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
 
                     return await _categoryRepo.DeleteCategory(id);
-                }
             }
             catch (Exception)
             {

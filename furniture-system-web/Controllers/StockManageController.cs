@@ -35,10 +35,7 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
                     return await _stockRepo.GetStock();
-                }
             }
             catch (Exception)
             {
@@ -53,11 +50,8 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
 
                     return await _stockRepo.UpdateStock(stock);
-                }
             }
             catch (Exception)
             {

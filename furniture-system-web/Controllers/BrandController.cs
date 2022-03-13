@@ -34,10 +34,7 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
                     return await _brandRepo.GetBrands();
-                }
             }
             catch (Exception)
             {
@@ -52,10 +49,7 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
                     return await _brandRepo.GetBrandById(id);
-                }
             }
             catch (Exception)
             {
@@ -71,10 +65,7 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
                     return await _brandRepo.SaveBrand(model);
-                }
             }
             catch (Exception)
             {
@@ -90,11 +81,7 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
-
                     return await _brandRepo.UpdateBrand(model);
-                }
             }
             catch (Exception)
             {
@@ -110,11 +97,8 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
 
                     return await _brandRepo.DeleteBrand(id);
-                }
             }
             catch (Exception)
             {

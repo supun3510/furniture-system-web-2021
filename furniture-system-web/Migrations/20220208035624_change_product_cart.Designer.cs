@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using furniture_system_web.Model;
 
 namespace furniture_system_web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class AuthenticationContextModelSnapshot : ModelSnapshot
+    [Migration("20220208035624_change_product_cart")]
+    partial class change_product_cart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

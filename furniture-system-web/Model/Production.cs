@@ -70,8 +70,11 @@ namespace furniture_system_web.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Bill_Code { get; set; }
+        public string Item_Name { get; set; }
         public string Item_Code { get; set; }
+        public double Retail_Price { get; set; }
         public double Discount { get; set; }
+        public double Discounted { get; set; }
         public int Quentity { get; set; }
         public double Total_Amount { get; set; }
         public bool Status { get; set; }

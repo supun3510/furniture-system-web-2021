@@ -33,10 +33,7 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
                     return await _companyRepo.GetCompanys();
-                }
             }
             catch (Exception)
             {
@@ -51,10 +48,7 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
                     return await _companyRepo.GetCompanyById(id);
-                }
             }
             catch (Exception)
             {
@@ -70,10 +64,7 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
                     return await _companyRepo.SaveCompany(model);
-                }
             }
             catch (Exception)
             {
@@ -89,11 +80,8 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
 
                     return await _companyRepo.UpdateCompany(model);
-                }
             }
             catch (Exception)
             {
@@ -109,11 +97,7 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
-
                     return await _companyRepo.DeleteCompany(id);
-                }
             }
             catch (Exception)
             {

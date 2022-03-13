@@ -34,10 +34,7 @@ namespace furniture_system_web.Controllers
         {
             try
             {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
                     return await _productionRepo.SaveBill(model);
-                }
             }
             catch (Exception)
             {
